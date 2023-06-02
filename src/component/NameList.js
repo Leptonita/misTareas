@@ -14,7 +14,7 @@ function NameList({ nameList, setNameList, readTodos }) {
     return (
         <header>
             <div className="title">
-                La lista de: <strong>
+                Mi lista de: <strong>
                     {nameList}</strong>
             </div>
 

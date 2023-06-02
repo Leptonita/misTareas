@@ -130,22 +130,26 @@ function App() {
   return (
     <div className="App">
       <div className='todo-container'>
+        {/* elegir listas existentes */}
         < DropDownSelect nameList={nameList} setNameList={setNameList} lista={lista} readTodos={readTodos} listaExists={listaExists} setListaExists={setListaExists} />
       </div>
-
+      {/* nombrar la lista de tareas */}
       <div className='todo-container'>
         <NameList nameList={nameList} setNameList={setNameList} readTodos={readTodos} lista={lista} />
       </div>
 
       <div className='todo-container'>
-        {message}
-      </div>
-      <div className='todo-container'>
+        {/* nombrar tarea */}
         <Form
           inputText={inputText} setInputText={setInputText} todos={todos} setTodos={setTodos} setSeeing={setSeeing} />
 
+        {/* listado de tareas */}
         <TodoList
           inputText={inputText} todos={todos} setTodos={setTodos} seeing={seeing} filteredTodosArr={filteredTodosArr} setFilteredTodosArr={setFilteredTodosArr} />
+      </div>
+
+      <div className='todo-container'>
+        {message}
       </div>
       <div className='crud-container'>
         <button className='crudBtn' onClick={newTodos}>Nueva lista</button>

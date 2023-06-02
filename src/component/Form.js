@@ -25,15 +25,15 @@ function Form({ inputText, setInputText, todos, setTodos, setSeeing }) {
     return (
         <form>
             <span className="material-symbols-outlined">&#xf849;</span>
-            <input type="text" className="todo-input" placeholder="escribe y añade las tareas" onChange={inputHandler} value={inputText} />
+            <input type="text" className="todo-input" placeholder="describe y añade las tareas" onChange={inputHandler} value={inputText} />
             <button onClick={todoSubmitHandler}>
                 <span className="material-symbols-outlined btn">&#xe145;</span>
             </button>
             <div className="select">
                 <select name="todos" className="filter-todo" onChange={seeingHandler}>
-                    <option value="all">Ver todas</option>
-                    <option value="completed">Completadas</option>
-                    <option value="uncompleted">No realizadas</option>
+                    <option value="all">Ver todas las tareas</option>
+                    <option value="completed">Tareas completadas</option>
+                    <option value="uncompleted">Tareas pendientes</option>
                 </select>
             </div>
         </form>

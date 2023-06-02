@@ -37,7 +37,7 @@ const DropDownSelect = ({ nameList, setNameList, lista, readTodos, setListaExist
 
     return (
         <div className="select selectDropDownNames" >
-            <select name="NamesOfLista" className="filter-todo filterTodoDrop" onChange={selHandler}>
+            <select name="NamesOfLista" className="filter-todo filterTodoDrop  tSel" onChange={selHandler}>
                 <option selected hidden>Elige una lista existente ...</option>
                 {namesAliasList}
             </select>
