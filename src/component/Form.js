@@ -11,9 +11,11 @@ function Form({ inputText, setInputText, todos, setTodos, setSeeing }) {
         /*  acumular los datos en array 'todo' 
         y después del submit queremos que el inputText empiece de cero
         */
-        setTodos([
-            ...todos, { text: inputText, completed: false, id: Date.now() }]
-        );
+        if (inputText.trim() !== "") {
+            setTodos([
+                ...todos, { text: inputText, completed: false, id: Date.now() }]
+            );
+        }
         setInputText("");
     }
 
@@ -25,7 +27,7 @@ function Form({ inputText, setInputText, todos, setTodos, setSeeing }) {
     return (
         <form>
             <span className="material-symbols-outlined">&#xf849;</span>
-            <input type="text" className="todo-input" placeholder="describe y añade las tareas" onChange={inputHandler} value={inputText} />
+            <input type="text" className="todo-input" placeholder="describe y añade cada tarea" onChange={inputHandler} value={inputText} />
             <button onClick={todoSubmitHandler}>
                 <span className="material-symbols-outlined btn">&#xe145;</span>
             </button>
