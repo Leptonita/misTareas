@@ -1,9 +1,14 @@
-import Form from './component/Form';
+import { GlobalStyles } from './styles/Global';
+import { ThemeProvider } from 'styled-components';
+import { light, dark } from './styles/Theme.styled';
+import TodoForm from './component/TodoForm';
 import TodoList from './component/TodoList';
 import NameList from './component/NameList';
 import { useEffect, useState } from "react";
 import DropDownSelect from './component/DropDownSelect';
 import { createItem, getItemsByCondition, updateItem, deleteItem } from './application/api'
+import { Button, CrudBtn, ImpBtn, ThemeBtn } from './styles/Buttons';
+
 
 function App() {
 
@@ -15,7 +20,7 @@ function App() {
   const [lista, setLista] = useState("Lista");
   const [listaExists, setListaExists] = useState(false);
   const [message, setMessage] = useState(" ");
-
+  const [selectedTheme, setSelectedTheme] = useState(light);
 
   useEffect(() => {
     setFilteredTodosArr(() => {
@@ -126,9 +131,22 @@ function App() {
       }
     }
   }
-  console.log({ nameList });
+  const toggleTheme = () => {
+    (selectedTheme === light) ? setSelectedTheme(dark) : setSelectedTheme(light);
+  }
+  //console.log({ nameList });
+
   return (
-    <div className="App">
+    <ThemeProvider theme={selectedTheme}>
+      <GlobalStyles />
+      <div className='rightAlign'>
+        <ThemeBtn onClick={() => toggleTheme()}>
+          {(selectedTheme === light)
+            ? (<span class="material-symbols-outlined themeIcon">light_mode</span>)
+            : (<span class="material-symbols-outlined themeIcon">dark_mode</span>)}
+        </ThemeBtn>
+      </div>
+
       <div className='todo-container'>
         {/* elegir listas existentes */}
         < DropDownSelect nameList={nameList} setNameList={setNameList} lista={lista} readTodos={readTodos} listaExists={listaExists} setListaExists={setListaExists} />
@@ -140,7 +158,7 @@ function App() {
 
       <div className='todo-container'>
         {/* nombrar tarea */}
-        <Form
+        <TodoForm
           inputText={inputText} setInputText={setInputText} todos={todos} setTodos={setTodos} setSeeing={setSeeing} />
 
         {/* listado de tareas */}
@@ -152,15 +170,15 @@ function App() {
         {message}
       </div>
       <div className='crud-container'>
-        <button className='crudBtn' onClick={newTodos}>Nueva lista</button>
+        <CrudBtn className='crudBtn' onClick={newTodos}>Nueva lista</CrudBtn>
         {listaExists
-          ? (<><button className='crudBtn importantBtn' onClick={updateTodos}>Actualizar lista</button>
+          ? (<><ImpBtn className='crudBtn importantBtn' onClick={updateTodos}>Actualizar lista</ImpBtn>
 
-            <button className='crudBtn' onClick={readTodos}>Recuperar lista</button>
-            <button className='crudBtn' onClick={deleteList}>Borrar lista</button>
+            <CrudBtn className='crudBtn' onClick={readTodos}>Recuperar lista</CrudBtn>
+            <CrudBtn className='crudBtn' onClick={deleteList}>Borrar lista</CrudBtn>
           </>)
           :
-          (nameList !== "") && <button className='crudBtn importantBtn' onClick={saveTodos}>Guardar lista</button>
+          (nameList !== "") && <ImpBtn className='crudBtn importantBtn' onClick={saveTodos}>Guardar lista</ImpBtn>
         }
 
 
@@ -168,7 +186,7 @@ function App() {
 
       </div>
 
-    </div>
+    </ThemeProvider>
   );
 }
 

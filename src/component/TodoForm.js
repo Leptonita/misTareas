@@ -1,5 +1,6 @@
+import { Form } from '../styles/Form';
 
-function Form({ inputText, setInputText, todos, setTodos, setSeeing }) {
+function TodoForm({ inputText, setInputText, todos, setTodos, setSeeing }) {
 
     const inputHandler = (e) => {
         setInputText(e.target.value);
@@ -11,12 +12,18 @@ function Form({ inputText, setInputText, todos, setTodos, setSeeing }) {
         /*  acumular los datos en array 'todo' 
         y después del submit queremos que el inputText empiece de cero
         */
+
+        if (inputText === undefined) {
+            setInputText("");
+        }
+
         if (inputText.trim() !== "") {
             setTodos([
                 ...todos, { text: inputText, completed: false, id: Date.now() }]
             );
         }
         setInputText("");
+
     }
 
     const seeingHandler = (e) => {
@@ -25,7 +32,7 @@ function Form({ inputText, setInputText, todos, setTodos, setSeeing }) {
 
     /* &#xE8B6;    &#xf756;    */
     return (
-        <form>
+        <Form>
             <span className="material-symbols-outlined">&#xf849;</span>
             <input type="text" className="todo-input" placeholder="describe y añade cada tarea" onChange={inputHandler} value={inputText} />
             <button onClick={todoSubmitHandler}>
@@ -38,8 +45,8 @@ function Form({ inputText, setInputText, todos, setTodos, setSeeing }) {
                     <option value="uncompleted">Tareas pendientes</option>
                 </select>
             </div>
-        </form>
+        </Form>
 
     )
 }
-export default Form;
+export default TodoForm;

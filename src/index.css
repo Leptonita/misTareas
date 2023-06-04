@@ -1,93 +1,6 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  /*outline: 1px solid limegreen !important;
-  */
-}
-
-body {
-  background-color: #ffe19f;
-  background-image: linear-gradient(120deg, #ffe5ac 0%, #fdd786 50%, #ffe5ac 100%);
-  color: rgb(15, 0, 59);
-  font-family: "Poppins", sans-serif;
-  min-height: 100vh;
-}
-
-
-
-
-header {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 10px;
-}
-
-header .title {
-  text-align: center;
-  font-size: 1rem;
-  color: #40aac8;
-  min-width: 40vw;
-}
-
-
-
-form {
-  min-height: 15vh;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  align-items: center;
-  min-width: 410px;
-}
-
 .todo-input {
   min-width: 290px;
   max-width: 570px;
-}
-
-form input {
-  font-size: 0.9rem;
-  border: none;
-  outline: none;
-  padding: 1.1rem 0.5rem;
-  background: white;
-}
-
-header titleInput {
-  padding: 0.5rem;
-  font-size: 1rem;
-  border: none;
-  background: white;
-}
-
-
-button {
-  color: #ff8c6c;
-  background: #fffef7;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.crudBtn {
-  padding: 0.4rem 0.7rem;
-  margin: 0.4rem;
-  border: 2px solid #ec5a32;
-  border-radius: 25px;
-}
-
-.importantBtn {
-  background-color: #a70656;
-  color: #f3fcff;
-}
-
-.importantBtn:hover {
-  color: #0e596d;
-  background-color: #47d7ff;
-  border: 1px solid #0e596d;
 }
 
 .material-symbols-outlined {
@@ -116,6 +29,25 @@ button {
   background-color: #47d7ff;
 }
 
+.themeIcon {
+  font-size: 21px;
+  height: 17px;
+
+  color: rgb(255, 132, 0);
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.theme :hover {
+  color: #ec5a32;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
 .btn {
   cursor: pointer;
   color: white;
@@ -126,6 +58,11 @@ button:hover,
 .btn:hover {
   background: #ec5a32;
   color: white;
+}
+
+.rightAlign {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .todo-container {
@@ -232,7 +169,7 @@ select {
 }
 
 .tSel {
-  font-size: 1rem;
+  font-size: 0.85rem;
 }
 
 select {
@@ -266,19 +203,36 @@ select {
 input,
 select,
 .todo {
-  border-bottom: 3px solid #ff8c6c !important;
+  border-bottom: 3px solid #ff8c6ca4 !important;
 }
 
 ::placeholder {
-  color: rgba(0, 173, 12, 0.85);
+  /* color: rgb(1, 137, 10); */
+  color: rgb(142, 142, 142);
   font-style: italic;
-  font-size: 0.92rem;
+  font-size: 0.90rem;
+}
+
+
+@media(max-width: 768px) {
+  .crudBtn {
+    padding: 0.4rem 0.85rem;
+    margin: 0.4rem 0.3rem;
+    font-size: 0.9rem;
+  }
 }
 
 @media(max-width: 425px) {
   body {
     background-color: #ffe19f;
     background-image: none;
+  }
+
+  .crudBtn {
+    padding: 0.4rem 1rem;
+    margin: 0.4rem 0.2rem;
+    font-size: 0.85rem;
+    border-radius: 23px;
   }
 }
 
@@ -306,5 +260,12 @@ select,
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  .crudBtn {
+    padding: 0.4rem 0.85rem;
+    margin: 0.4rem 0.2rem;
+    font-size: 0.8rem;
+    border-radius: 20px;
   }
 }
