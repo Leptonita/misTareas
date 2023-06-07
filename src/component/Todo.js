@@ -1,3 +1,5 @@
+import { TodoDiv } from '../styles/Todo.styled';
+import { TaskTrashBtn, TaskCompletehBtn } from '../styles/Buttons.styled';
 
 const Todo = ({ todo, todos, setTodos, filteredTodosArr, setFilteredTodosArr }) => {
     //events
@@ -12,17 +14,16 @@ const Todo = ({ todo, todos, setTodos, filteredTodosArr, setFilteredTodosArr }) 
                 ? { ...item, completed: !item.completed }
                 : { ...item, completed: item.completed })
         )
-
     }
 
     //console.log({ todo });
     return (
-        <div className="todo">
+        <TodoDiv>
             <li className={`todo-item ${todo.completed ? "completed" : ""}`}>{/* {todo.id} -  */}{todo.text}</li>
 
-            <button className="complete-btn" onClick={completeHandler}><i className="fas fa-check"></i></button>
-            <button className="trash-btn" onClick={deleteHandler} ><i className="fas fa-trash"></i></button>
-        </div >
+            <TaskCompletehBtn onClick={completeHandler}><i className="fas fa-check"></i></TaskCompletehBtn>
+            <TaskTrashBtn onClick={deleteHandler} ><i className="fas fa-trash"></i></TaskTrashBtn>
+        </TodoDiv >
     )
 }
 export default Todo;

@@ -1,6 +1,7 @@
-import { Form } from '../styles/Form';
+import { Form } from '../styles/Form.styled';
+import { Button, PlusBtn } from '../styles/Buttons.styled';
 
-function TodoForm({ inputText, setInputText, todos, setTodos, setSeeing }) {
+function TodoForm({ inputText, setInputText, todos, setTodos, setSeeing, selectedTheme }) {
 
     const inputHandler = (e) => {
         setInputText(e.target.value);
@@ -34,12 +35,16 @@ function TodoForm({ inputText, setInputText, todos, setTodos, setSeeing }) {
     return (
         <Form>
             <span className="material-symbols-outlined">&#xf849;</span>
-            <input type="text" className="todo-input" placeholder="describe y añade cada tarea" onChange={inputHandler} value={inputText} />
-            <button onClick={todoSubmitHandler}>
+            <input type="text" className="todo-input" placeholder="describe y añade cada tarea" onChange={inputHandler} value={inputText} style={{ background: (selectedTheme.name === "light-theme") ? "#fff" : "#fff5e2" }} />
+            {/* <Button onClick={todoSubmitHandler}>
                 <span className="material-symbols-outlined btn">&#xe145;</span>
-            </button>
+            </Button> */}
+            <PlusBtn onClick={todoSubmitHandler}>
+                &#xe145;
+            </PlusBtn>
             <div className="select">
-                <select name="todos" className="filter-todo" onChange={seeingHandler}>
+                <select name="todos" className="filter-todo" onChange={seeingHandler}
+                    style={{ background: (selectedTheme.name === "light-theme") ? "#fff" : "#fff5e2" }} >
                     <option value="all">Ver todas las tareas</option>
                     <option value="completed">Tareas completadas</option>
                     <option value="uncompleted">Tareas pendientes</option>

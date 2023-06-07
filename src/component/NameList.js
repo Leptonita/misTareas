@@ -1,7 +1,8 @@
-import { Header } from '../styles/Header';
-import { Form } from '../styles/Form';
+import { Header } from '../styles/Header.styled';
+import { Form } from '../styles/Form.styled';
+import { Button, PlusBtn } from '../styles/Buttons.styled';
 
-function NameList({ nameList, setNameList, readTodos }) {
+function NameList({ nameList, setNameList, readTodos, selectedTheme }) {
 
     const inputHandler = (e) => {
         setNameList(e.target.value);
@@ -17,7 +18,6 @@ function NameList({ nameList, setNameList, readTodos }) {
                 readTodos();
             }
         }
-
     }
 
     return (
@@ -30,10 +30,11 @@ function NameList({ nameList, setNameList, readTodos }) {
             <Form>
 
                 <span className="material-symbols-outlined titleIcon ">&#xf88d;</span>
-                <input type="text" className="titleInput todo-input" placeholder="escribe el nombre de la lista" onChange={inputHandler} value={nameList} />
-                <button onClick={nameSubmitHandler}>
+                <input type="text" className="titleInput todo-input" placeholder="escribe el nombre de la lista" onChange={inputHandler} value={nameList} style={{ background: (selectedTheme.name === "light-theme") ? "#fff" : "#fff5e2" }} />
+                {/* <Button onClick={nameSubmitHandler}>
                     <span className="material-symbols-outlined btn">&#xe145;</span>
-                </button>
+                </Button> */}
+                <PlusBtn onClick={nameSubmitHandler}>&#xe145;</PlusBtn>
             </Form>
         </Header>
     )

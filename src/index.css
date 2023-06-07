@@ -1,3 +1,13 @@
+/* NavBar */
+
+#sidebar a {
+  color: rgb(192, 253, 255);
+}
+
+#sidebar a.active {
+  color: white;
+}
+
 .todo-input {
   min-width: 290px;
   max-width: 570px;
@@ -38,17 +48,15 @@
   cursor: pointer;
 }
 
-.theme :hover {
-  color: #ec5a32;
-}
 
-button {
+/* button {
   border: none;
   cursor: pointer;
   transition: all 0.3s ease;
-}
+} */
 
-.btn {
+/*btns plus*/
+/* .btn {
   cursor: pointer;
   color: white;
   background-color: #ff6f47;
@@ -59,7 +67,7 @@ button:hover,
   background: #ec5a32;
   color: white;
 }
-
+ */
 .rightAlign {
   display: flex;
   justify-content: flex-end;
@@ -85,7 +93,7 @@ button:hover,
   list-style: none;
 }
 
-.todo {
+/* .todo {
   margin: 0.5rem;
   background: white;
   font-size: 0.9rem;
@@ -94,7 +102,7 @@ button:hover,
   justify-content: space-between;
   align-items: center;
   transition: all 1s ease;
-}
+} */
 
 .todo-item {
   padding: 0rem 0.5rem;
@@ -109,10 +117,10 @@ button:hover,
   margin-left: auto;
 }
 
-.todo li {
+/* .todo li {
   flex: 1;
-}
-
+} */
+/* 
 .trash-btn,
 .complete-btn {
   background: #ff6f47;
@@ -125,7 +133,7 @@ button:hover,
 
 .complete-btn {
   background: rgb(10, 193, 44);
-}
+} */
 
 
 

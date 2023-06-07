@@ -12,7 +12,7 @@ export const Form = styled.form`
   font-size: 0.9rem;
   border: none;
   outline: none;
-  padding: 1.1rem 0.5rem;
+  padding: 1.09rem 0.5rem;
   background: white;
 }
 `;
