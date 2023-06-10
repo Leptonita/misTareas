@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 //import LogoDS from '../assets/img/logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserLock, faCircleXmark, faCircleCheck, faXmark, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { faCircleXmark, faCircleCheck, faXmark, faEye, faEyeSlash, faPeopleGroup } from '@fortawesome/free-solid-svg-icons';
 import { OverlayLogin, Header, Form, DivInput, Input, Icon, DivBtns, ErrorMessage, BtnsIds, BtnNewAcc, DivTxtPw, DivMessage, DivTxt, NavLinkOlvido } from './Login-styled';
 import { useNavigate } from "react-router-dom";
 import { useMyContext } from '../application/Provider';
@@ -11,15 +11,16 @@ import useTheme from '../hook/useTheme';
 import { ThemeProvider } from 'styled-components';
 import { light, dark, happy } from '../styles/Theme.styled';
 
-const Login = () => {
+
+const LoginPublic = () => {
 
     const [state, setState] = useMyContext();
     const navigate = useNavigate();
     const { selectedTheme, setSelectedTheme, toggleTheme } = useTheme(happy)
-    const [listaUsers, setListaUsers] = useState("ListaUsers");
+    const [listaUsers, setListaUsers] = useState("ListaUsersPublic");
     const [users, setUsers] = useState(() => {
         try {
-            /** getting from firestore db */
+            //getting from firestore db
             const usersStored = getItems(listaUsers);
             return usersStored ? usersStored : [];
         } catch (error) {
@@ -37,7 +38,7 @@ const Login = () => {
 
     }
 
-    /** getting last user from localStorage  */
+    //getting last user from localStorage    
     const [userLS, setUserLS] = useState(() => {
         const lastUser = JSON.parse(localStorage.getItem("userStored"));
         return lastUser ? lastUser : { "email": "", "password": "" };
@@ -52,7 +53,7 @@ const Login = () => {
     const [validPassword, setValidPassword] = useState(false);
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [message, setMessage] = useState("Iniciar sesión privada");
+    const [message, setMessage] = useState("Iniciar sesión team");
 
 
     useEffect(() => {
@@ -70,21 +71,21 @@ const Login = () => {
 
     useEffect(() => {
         if (isLoggedIn) {
-            navigate('/mistareas');
+            navigate('/');
         }
     }, [isLoggedIn]);
 
     const handleEmail = (event) => {
         const inputEmail = event.target.value;
 
-        /** email no empty */
+        //email no empty
         if (inputEmail !== undefined) {
             setEmail(inputEmail);
             //const userStored = ' varios probando'
             const userStored = users.find(us => us.email === inputEmail);
-            /** if user's email  already exists in users Array in localStorage */
+            //if user's email  already exists in users Array in localStorage
             if (userStored) {
-                //setUserLS(userStored);
+                /*  setUserLS(userStored); */
                 setUserLS({ "email": userStored.email, "password": userStored.password });
             } else {
                 setUserLS({ ...userLS, "email": inputEmail });
@@ -94,7 +95,7 @@ const Login = () => {
 
     const handlePassword = (event) => {
         const inputPassword = event.target.value;
-        /** password validation */
+        //password validation
         if (inputPassword !== undefined) {
             setPassword(inputPassword);
         }
@@ -102,13 +103,13 @@ const Login = () => {
     }
 
     const emailValidation = () => {
-        /** email validation */
+        //email validation
         const expression = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
         (expression.test(email)) ? setValidEmail(true) : setValidEmail(false);
     }
 
     const passwordValidation = () => {
-        /** password validation: 8 to 12 elements */
+        //password validation: 8 to 12 elements
         const expression = /^.{8,12}$/;
         (expression.test(password)) ? setValidPassword(true) : setValidPassword(false);
     }
@@ -120,28 +121,28 @@ const Login = () => {
         emailValidation();
         passwordValidation();
 
-        /** find user  */
+        //find user 
         const userStored = users.find(client => client.email === email);
-        /**if user's email already exists in users Array in localStorage */
+        //if user's email already exists in users Array in localStorage
         if (userStored) {
             // setUserLS(userStored);
             setUserLS({ "email": userStored.email, "password": userStored.password });
             setMessage("Ya existe un usuario con este correo");
         }
 
-        /** Sign up create new user */
+        //Sign up create new user
         if (!userStored && validPassword && validEmail) {
-            /** add new user */
+            //add new user
             createItem(listaUsers, { key: email, email, password });
 
             setUsers([...users, { key: email, email, password }]);
             setUserLS({ ...userLS, "password": password });
             setIsLoggedIn(true);
             setMessage('¡Bienvenido!');
-            setState({ ...state, user: email });
+            setState({ ...state, userPublic: email });
 
         } else {
-            /** check email and password for login */
+            //check email and password for login
             setIsLoggedIn(false);
         }
 
@@ -152,26 +153,26 @@ const Login = () => {
 
 
         emailValidation();
-        passwordValidation();
+        passwordValidation(); /* */
         // const userStored = ' varios probando'
         const userStored = await users.find(client => client.email === email);
-        /** if user's email  already exists in users Array in localStorage */
+        //if user's email  already exists in users Array in localStorage
         if (userStored) {
-            /**  setUserLS(userStored); */
+            // setUserLS(userStored);
             setUserLS({ "email": userStored.email, "password": userStored.password });
 
             if (userStored !== null) {
                 if (userStored.password === password) {
                     setIsLoggedIn(true);
                     setMessage('¡Bienvenido!');
-                    setState({ ...state, user: email });
+                    setState({ ...state, userPublic: email });
                     console.log('logged');
                 } else {
                     console.log('NO-logged');
                     setIsLoggedIn(false);
                     setUserLS({ ...userLS, "password": password });
                     setMessage('combinación incorrecta de correo y contraseña');
-                    setState({ ...state, user: null });
+                    setState({ ...state, userPublic: null });
                 }
             }
         } else {
@@ -179,7 +180,7 @@ const Login = () => {
         }
     }
 
-    const hadleTooglePw = () => {
+    const handleTooglePw = () => {
         if (typeInput === "password") {
             setIconPw(faEye);
             setTypeInput("text");
@@ -207,7 +208,8 @@ const Login = () => {
             <GlobalStyles />
             <OverlayLogin /* isVisible={modalVis} */>
                 <Form onSubmit={onSubmit}>
-                    <Header>misTareas <FontAwesomeIcon icon={faUserLock} />
+                    <Header>
+                        misTareas <FontAwesomeIcon icon={faPeopleGroup} />
                         <br />
                         <DivMessage>{message}</DivMessage>
                     </Header>
@@ -239,7 +241,7 @@ const Login = () => {
                             onBlur={passwordValidation}
                             isValid={validPassword}
                         />
-                        <Icon onClick={hadleTooglePw} style={{ cursor: 'pointer' }} valid={validPassword}>
+                        <Icon onClick={handleTooglePw} style={{ cursor: 'pointer' }} valid={validPassword}>
                             {validPassword
                                 ? <FontAwesomeIcon icon={iconPw} style={{ color: "#1f9e34", }} />
                                 : <FontAwesomeIcon icon={iconPw} style={{ color: "#f00000", }} />
@@ -249,20 +251,21 @@ const Login = () => {
                         <ErrorMessage valid={validPassword}>
                             {validPassword ? "" : "se requieren de 8 a 12 caracteres"}
                         </ErrorMessage>
-                        <DivTxtPw>
+                        {/* <DivTxtPw>
                             <NavLinkOlvido to="/updateUser">¿Olvidó su contraseña?</NavLinkOlvido>
-                        </DivTxtPw>
+                        </DivTxtPw> */}
                     </DivInput>
 
                     <br />
                     <DivBtns>
+                        {/* ,logC  sigC*/}
                         <BtnsIds onClick={handleLogin}> Empezar </BtnsIds>
                         <br /><br />
                         <hr />
                         <br />
                         <DivTxt>
-                            ¿Aún no tiene una cuenta gratuita?</DivTxt>
-                        <BtnNewAcc onClick={handleSignup}> Cree su cuenta </BtnNewAcc>
+                            El acceso a la app es por invitación</DivTxt>
+                        {/* <BtnNewAcc onClick={handleSignup}> Cree su cuenta </BtnNewAcc> */}
 
                     </DivBtns>
                 </Form>
@@ -272,4 +275,4 @@ const Login = () => {
     )
 
 }
-export default Login;
+export default LoginPublic;

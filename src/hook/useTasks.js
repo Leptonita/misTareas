@@ -5,12 +5,12 @@ import { createItem, getItemsByCondition, updateItem, deleteItem } from '../appl
 
 const useTasks = (collectionName) => {
 
+  const [lista, setLista] = useState(collectionName);
   const [inputText, setInputText] = useState("");
   const [todos, setTodos] = useState([]);
   const [seeing, setSeeing] = useState("all");
   const [filteredTodosArr, setFilteredTodosArr] = useState([]);
   const [nameList, setNameList] = useState("");
-  const [lista, setLista] = useState(collectionName);
   const [listaExists, setListaExists] = useState(false);
   const [message, setMessage] = useState(" ");
 
@@ -32,7 +32,7 @@ const useTasks = (collectionName) => {
       await readTodos();
     }
 
-  }, [nameList, todos]);  /* */
+  }, [nameList, todos]);  /*lista,  */
 
   const newTodos = () => {
     setListaExists(false);
@@ -50,7 +50,7 @@ const useTasks = (collectionName) => {
       setListaExists(false);
     } else {
       if (nameList.trim() !== "") {
-        const res = await getItemsByCondition(lista, nameList);
+        const res = await getItemsByCondition(lista, 'aliasList', nameList);
 
         if (res.length === 0) {
           const d = new Date();
@@ -71,9 +71,10 @@ const useTasks = (collectionName) => {
   const readTodos = async () => {
     setMessage("");
     if (nameList !== "") {
-      const res = await getItemsByCondition(lista, nameList);
+      const res = await getItemsByCondition(lista, 'aliasList', nameList);
+      console.log({ res });
       if (res.length > 0) {
-        setListaExists(true)
+        setListaExists(true);
         //get the last doc with the name nameList on the lista collection
         const resObj = res[res.length - 1];
         // console.log(typeof resObj, resObj, resObj.id);
@@ -91,7 +92,7 @@ const useTasks = (collectionName) => {
   const updateTodos = async () => {
     setMessage(" ");
     if (nameList !== "") {
-      const res = await getItemsByCondition(lista, nameList);
+      const res = await getItemsByCondition(lista, 'aliasList', nameList);
 
       if (res.length > 0) {
         const idDoc = res[0].id.toString();
@@ -99,6 +100,7 @@ const useTasks = (collectionName) => {
         updateItem(lista, idDoc, { aliasList: nameList, dataList: todos });
         setMessage("lista actualizada");
       } else {
+        setListaExists(false);
         setMessage("no existe una lista con este nombre");
       }
     }
@@ -107,7 +109,7 @@ const useTasks = (collectionName) => {
   const deleteList = async () => {
     setMessage(" ");
     if (nameList !== "") {
-      const res = await getItemsByCondition(lista, nameList);
+      const res = await getItemsByCondition(lista, 'aliasList', nameList);
 
       if (res.length > 0) {
         const idDoc = res[0].id.toString();
@@ -115,6 +117,7 @@ const useTasks = (collectionName) => {
           deleteItem(lista, idDoc);
           setNameList("");
           readTodos();
+          setListaExists(false);
         } else {
           return null;
         }

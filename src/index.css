@@ -1,11 +1,11 @@
 /* NavBar */
 
 #sidebar a {
-  color: rgb(192, 253, 255);
+  color: rgb(18, 207, 213);
 }
 
 #sidebar a.active {
-  color: white;
+  color: #ff6f47;
 }
 
 .todo-input {

@@ -16,7 +16,7 @@ const Todo = ({ todo, todos, setTodos, filteredTodosArr, setFilteredTodosArr }) 
         )
     }
 
-    //console.log({ todo });
+    console.log(todo.id);
     return (
         <TodoDiv>
             <li className={`todo-item ${todo.completed ? "completed" : ""}`}>{/* {todo.id} -  */}{todo.text}</li>

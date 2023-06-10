@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPersonShelter, faPeopleGroup } from '@fortawesome/free-solid-svg-icons';
+import { faUserLock, faPersonChalkboard, faPeopleGroup } from '@fortawesome/free-solid-svg-icons';
 
 const NavBar = () => {
     const styles = {
@@ -16,7 +16,7 @@ const NavBar = () => {
     return (
         <nav id="sidebar" style={styles}>
             <NavLink to="/mistareas" style={linkStyles}>
-                <FontAwesomeIcon icon={faPersonShelter} />
+                <FontAwesomeIcon icon={faUserLock} />
             </NavLink>
             <> </>
             <NavLink to="/" style={linkStyles}>

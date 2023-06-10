@@ -14,12 +14,11 @@ const colors = {
 
 //Web info modal
 export const OverlayLogin = styled.div`
- /*height: 80vh;*/ position: fixed;
+ height: 100%; 
+ /*position: fixed;
 z-index: 10; 
-margin-top: 115px;
-background: #80808030;
-
-
+margin-top: 45px;
+background: #80808030;*/
 top: 0;
 left: 0;
 width: 100vw;
@@ -31,6 +30,7 @@ export const Header = styled.div`
 display: flex;
 flex-direction: column;
 align-items: center;
+justify-content: center;
 padding: 20px 0;
 `;
 
