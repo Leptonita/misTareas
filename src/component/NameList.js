@@ -1,8 +1,13 @@
 import { Header } from '../styles/Header.styled';
 import { Form } from '../styles/Form.styled';
 import { Button, PlusBtn } from '../styles/Buttons.styled';
+import { useEffect } from 'react';
 
-function NameList({ nameList, setNameList, readTodos, selectedTheme }) {
+function NameList({ nameList, setNameList, readTodos, selectedTheme, setListaExists, listaExists }) {
+
+    useEffect(() => {
+        (listaExists === false) ? setNameList("") : setNameList(nameList);
+    }, [listaExists]);
 
     const inputHandler = (e) => {
         setNameList(e.target.value);
@@ -19,7 +24,7 @@ function NameList({ nameList, setNameList, readTodos, selectedTheme }) {
             }
         }
     }
-
+    //console.log({ listaExists })
     return (
         <Header>
             <div className="title">

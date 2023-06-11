@@ -47,7 +47,7 @@ export const SymbolBtn = styled(Button)`
   direction: ltr;
   color: white;
   background-color: #ffc72d;
-  height: 54px;
+  height: 52px;
   width: 50px;
   justify-content: center;
 
@@ -72,6 +72,8 @@ background: transparent;
 `;
 
 export const TaskBtn = styled.button`
+  height: 52px;
+  width: 50px;
   background: #ff6f47;
   color: white;
   border: none;
@@ -96,6 +98,16 @@ transition: all 0.3s ease;
 
   &:hover {
   background: rgb(3, 157, 31);
+  color: white;
+  }
+`;
+
+export const TaskUpdatehBtn = styled(SymbolBtn)`
+background: #ffc72d;
+transition: all 0.3s ease;
+
+  &:hover {
+  background: #ffb52d;
   color: white;
   }
 `;

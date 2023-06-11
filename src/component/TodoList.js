@@ -8,8 +8,8 @@ function TodoList({ todos, setTodos, filteredTodosArr, setFilteredTodosArr }) {
         <div className="todo-container">
             <ul className="todo-list">
                 {
-                    filteredTodosArr.map(todo => (
-                        <Todo key={todo.id} todo={todo} todos={todos} filteredTodosArr={filteredTodosArr} setTodos={setTodos} setFilteredTodosArr={setFilteredTodosArr} />
+                    filteredTodosArr.map((todo, i) => (
+                        <Todo key={todo.id} dataListIndex={i} todo={todo} todos={todos} filteredTodosArr={filteredTodosArr} setTodos={setTodos} setFilteredTodosArr={setFilteredTodosArr} />
                     ))}
             </ul>
         </div>

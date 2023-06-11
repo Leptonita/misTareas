@@ -4,21 +4,22 @@ import { light, dark, happy } from '../styles/Theme.styled';
 import TodoForm from '../component/TodoForm';
 import TodoList from '../component/TodoList';
 import NameList from '../component/NameList';
-import { useEffect, useState } from "react";
+import { useMyContext } from '../application/Provider';
 import DropDownSelect from '../component/DropDownSelect';
-import { createItem, getItemsByCondition, updateItem, deleteItem } from '../application/api'
+//import { createItem, getItemsByCondition, updateItem, deleteItem } from '../application/api'
 import { Button, CrudBtn, ImpBtn, ThemeBtn } from '../styles/Buttons.styled';
 import useTasks from '../hook/useTasks';
 import useTheme from '../hook/useTheme';
 
 function TasksPublic() {
 
+  const [state, setState] = useMyContext();
   const { inputText, setInputText, todos, setTodos, seeing, setSeeing, filteredTodosArr, setFilteredTodosArr, nameList, setNameList, lista, setLista, listaExists, setListaExists, message, setMessage, readTodos, newTodos, updateTodos, deleteList, saveTodos } = useTasks("Lista");
   const { selectedTheme, setSelectedTheme, toggleTheme } = useTheme(light)
 
 
-
-  //console.log({ nameList });
+  //console.log({ state });
+  // console.log({ nameList });
 
   return (
     <ThemeProvider theme={selectedTheme}>
@@ -39,7 +40,7 @@ function TasksPublic() {
       </div>
       {/* nombrar la lista de tareas */}
       <div className='todo-container'>
-        <NameList nameList={nameList} setNameList={setNameList} readTodos={readTodos} lista={lista} selectedTheme={selectedTheme} />
+        <NameList nameList={nameList} setNameList={setNameList} readTodos={readTodos} lista={lista} selectedTheme={selectedTheme} setListaExists={setListaExists} listaExists={listaExists} />
       </div>
 
       <div className='todo-container'>

@@ -166,7 +166,7 @@ const LoginPublic = () => {
                     setIsLoggedIn(true);
                     setMessage('¡Bienvenido!');
                     setState({ ...state, userPublic: email });
-                    console.log('logged');
+                    // console.log('logged');
                 } else {
                     console.log('NO-logged');
                     setIsLoggedIn(false);

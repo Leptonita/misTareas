@@ -37,7 +37,7 @@ function TasksPrivate() {
       </div>
       {/* nombrar la lista de tareas */}
       <div className='todo-container'>
-        <NameList nameList={nameList} setNameList={setNameList} readTodos={readTodos} lista={lista} selectedTheme={selectedTheme} />
+        <NameList nameList={nameList} setNameList={setNameList} readTodos={readTodos} lista={lista} selectedTheme={selectedTheme} setListaExists={setListaExists} listaExists={listaExists} />
       </div>
 
       <div className='todo-container'>

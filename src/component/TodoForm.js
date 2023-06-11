@@ -24,14 +24,12 @@ function TodoForm({ inputText, setInputText, todos, setTodos, setSeeing, selecte
             );
         }
         setInputText("");
-
     }
 
     const seeingHandler = (e) => {
         setSeeing(e.target.value);
     }
 
-    /* &#xE8B6;    &#xf756;    */
     return (
         <Form>
             <span className="material-symbols-outlined">&#xf849;</span>

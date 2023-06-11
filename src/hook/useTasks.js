@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import { useMyContext } from '../application/Provider';
 import { createItem, getItemsByCondition, updateItem, deleteItem } from '../application/api'
 
 
 
 const useTasks = (collectionName) => {
 
+  const [state, setState] = useMyContext();
   const [lista, setLista] = useState(collectionName);
   const [inputText, setInputText] = useState("");
   const [todos, setTodos] = useState([]);
@@ -35,6 +37,7 @@ const useTasks = (collectionName) => {
   }, [nameList, todos]);  /*lista,  */
 
   const newTodos = () => {
+    setLista(lista);
     setListaExists(false);
     setNameList("");
     setTodos([]);
@@ -72,7 +75,7 @@ const useTasks = (collectionName) => {
     setMessage("");
     if (nameList !== "") {
       const res = await getItemsByCondition(lista, 'aliasList', nameList);
-      console.log({ res });
+      // console.log({ res });
       if (res.length > 0) {
         setListaExists(true);
         //get the last doc with the name nameList on the lista collection
@@ -86,6 +89,12 @@ const useTasks = (collectionName) => {
         setTodos([]);
       }
       //Nombre válido, puedes escribir las tareas para esta lista y cuando acabes guárdalas
+
+      /**
+       * Recoger las variables de la bd actuales
+       */
+      setState({ ...state, lista: { lista }, nameList: { nameList } })
+
     }
   }
 
@@ -96,7 +105,7 @@ const useTasks = (collectionName) => {
 
       if (res.length > 0) {
         const idDoc = res[0].id.toString();
-        console.log(idDoc);
+        // console.log(idDoc);
         updateItem(lista, idDoc, { aliasList: nameList, dataList: todos });
         setMessage("lista actualizada");
       } else {

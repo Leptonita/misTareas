@@ -15,12 +15,13 @@ const DropDownSelect = ({ nameList, setNameList, lista, readTodos, setListaExist
     useEffect(() => {
         setNameList(selectedList);
         readTodos();
-    }, [selectedList]);
+    }, [selectedList, listaExists]);
 
 
     /*  */
     const getArrLista = async () => {
         const arr = await getItemsByColName(lista);
+        //  arr.unshift({ aliasList: "Elige una lista existente ..." });
         setArrLista(arr);
     }
 
@@ -28,7 +29,7 @@ const DropDownSelect = ({ nameList, setNameList, lista, readTodos, setListaExist
 
         <Option Option key={listItem.altID} value={listItem.aliasList} > {listItem.aliasList}</Option >
     )
-    //  console.log({ arrLista }, { namesAliasList });
+    //console.log({ arrLista }, { namesAliasList });
 
 
     const selHandler = (e) => {
@@ -41,7 +42,7 @@ const DropDownSelect = ({ nameList, setNameList, lista, readTodos, setListaExist
 
     return (
         <div className="select selectDropDownNames">
-            <select name="NamesOfLista" className="filter-todo filterTodoDrop  tSel" onChange={selHandler} style={{ background: (selectedTheme.name === "light-theme") ? "#fff" : "#fff5e2" }} >
+            <select name="NamesOfLista" className="filter-todo filterTodoDrop  tSel" onChange={selHandler} style={{ background: (selectedTheme.name === "light-theme") ? "#fff" : "#fff5e2" }} value="{selectedOptionId}">
                 <option defaultValue hidden>Elige una lista existente ...</option>
                 {namesAliasList}
             </select>
