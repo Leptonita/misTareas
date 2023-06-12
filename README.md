@@ -7,3 +7,4 @@ email: mistareas@gmail.com
 contraseña: filT5498
 _______________________________________________
 
+Technologies used: REACT.js . FireStore as database . eMailJS as mailserver
